@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-lang-key="title-3"></title>
+
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <style>
+      .home-button,
+      .home-btn,
+      .language-container,
+      .language-container div {
+        pointer-events: auto !important;
+      }
+
+      .page-title {
+        opacity: 1;
+        z-index: 1000;
+      }
+
+      .language-container {
+        opacity: 1;
+        pointer-events: auto !important;
+        z-index: 999999 !important;
+      }
+
+      .home-button,
+      .home-btn {
+        opacity: 1;
+        pointer-events: auto !important;
+        z-index: 999999 !important;
+      }
+
+      main {
+        position: fixed;
+        width: 100%;
+        height: 85%;
+        bottom: 0;
+        z-index: 100;
+      }
+
+      .left-container,
+      .right-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 50%;
+        height: 100%;
+        transform: translate(-50%, -50%);
+        transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .left-container {
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .right-container {
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      main.show-video .left-container {
+        left: 25%;
+      }
+
+      main.show-video .right-container {
+        left: 75%;
+      }
+
+      .video-border {
+        width: 36vw;
+        height: 36vw;
+        background: white;
+        -webkit-mask-image: url("./assets/images/mask-image.png");
+        mask-image: url("./assets/images/mask-image.png");
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        visibility: hidden;
+        transform: scale(0.6);
+        pointer-events: none;
+        transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      main.show-video .video-border {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1);
+        pointer-events: auto;
+      }
+
+      .video-container {
+        width: 34vw;
+        height: 34vw;
+        overflow: hidden;
+        -webkit-mask-image: url("./assets/images/mask-image.png");
+        mask-image: url("./assets/images/mask-image.png");
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+      }
+
+      .video-swiper,
+      .video-swiper .swiper-wrapper,
+      .video-swiper .swiper-slide {
+        width: 100%;
+        height: 100%;
+      }
+
+      .masked-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .content-box {
+        position: relative;
+        width: 25vw;
+        opacity: 0;
+        visibility: hidden;
+        transform: scale(0.6);
+        pointer-events: none;
+        transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      main.show-video .content-box {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1);
+        pointer-events: auto;
+      }
+
+      .content-swiper {
+        width: 100%;
+      }
+
+      .content-text {
+        width: 25vw;
+        position: relative !important;
+      }
+
+      .content-text img {
+        width: 100%;
+        display: block;
+        object-fit: contain;
+      }
+
+      .content-text span {
+        position: absolute;
+        font-size: 2.2vw;
+        color: #4f4f4f;
+        top: 50%;
+        left: 50%;
+        width: 85%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        font-family: "BalooRegular";
+        line-height: 1.3;
+      }
+
+      .swiper-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4vw;
+        height: 4vw;
+        border: none;
+        background: transparent;
+        padding: 0;
+        cursor: pointer;
+        z-index: 20;
+        transition:
+          opacity 0.3s ease,
+          visibility 0.3s ease;
+      }
+
+      .swiper-btn img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+      }
+
+      .prev-btn {
+        left: -4.8vw;
+        top: 50%;
+        transform: scale(1) translateY(-50%);
+        transition: transform 0.3s ease;
+      }
+
+      .next-btn {
+        right: -4.8vw;
+        top: 50%;
+        transform: scale(1) translateY(-50%);
+        transition: transform 0.3s ease;
+      }
+
+      .prev-btn:hover,
+      .next-btn:hover {
+        transform: scale(1.05) translateY(-50%);
+      }
+
+      .prev-btn:hover img {
+        content: url("./assets/images/prev-btn-hover.png");
+      }
+
+      .next-btn:hover img {
+        content: url("./assets/images/next-btn-hover.png");
+      }
+      .prev-btn.hide-btn,
+      .next-btn.hide-btn {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .pages {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 1vw;
+        left: 3.5vw;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+      }
+
+      .pages .page {
+        width: 3.5vw;
+        height: 3.5vw;
+        background-color: white;
+        text-decoration: none;
+        color: #ff9d6b;
+        border: 0.3vw solid #dc9cff;
+        border-radius: 50%;
+        font-family: "BalooRegular";
+        font-size: 1.8vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0.2vw 0.2vw #753598c7;
+        transition: all 0.3s ease;
+      }
+
+      .page:hover,
+      .page-active {
+        background-color: #ff9d6b !important;
+        color: white !important;
+      }
+
+      .topic-2 {
+        width: 40vw;
+        height: 40vw;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: 0;
+        transform: translate(-50%, -50%);
+        transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      main.show-video .topic-2 {
+        opacity: 0;
+        visibility: hidden;
+        transform: translate(-50%, -50%) scale(0.6);
+        pointer-events: none;
+      }
+
+      .topic-2 img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: contain;
+      }
+
+      .topic-2 span {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        font-family: "BalooRegular";
+        color: white;
+        z-index: 2;
+        font-size: 3vw;
+        text-shadow: -0.2vw 0.2vw 0.2vw rgba(0, 0, 0, 0.448);
+      }
+
+      .topic-2 .num {
+        top: 20%;
+        line-height: 1;
+      }
+
+      .topic-2 .text {
+        top: 30%;
+        width: 65%;
+        line-height: 1.2;
+      }
+
+      .click-btn {
+        position: absolute;
+        right: 0;
+        background-color: #dc9cff;
+        border: 0.2vw solid white;
+        border-radius: 2vw;
+        width: 5vw;
+        height: 3vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: btnPopup 1.2s ease-in-out infinite;
+        cursor: pointer;
+        z-index: 20;
+        transition: opacity 0.4s ease;
+      }
+
+      main.show-video .click-btn {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .click-btn i {
+        font-size: 2vw;
+        color: white !important;
+      }
+
+      @keyframes btnPopup {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.12);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="home-button home-btn" href="index.html">
+      <img src="./assets/images/home.png" alt="" />
+    </a>
+
+    <div class="page-title">
+      <img src="./assets/images/t-1.png" alt="" />
+      <span data-lang-key="title"></span>
+      <img src="./assets/images/t-2.png" alt="" />
+    </div>
+
+    <div class="language-container">
+      <div class="english active">E</div>
+      <div class="hindi">H</div>
+      <div class="gujrati">G</div>
+    </div>
+
+    <main>
+      <div class="pages">
+        <a class="page" href="topic-1.html" data-lang-key="num-1"></a>
+        <a class="page" href="topic-2.html" data-lang-key="num-2"></a>
+        <a
+          class="page page-active"
+          href="topic-3.html"
+          data-lang-key="num-3"
+        ></a>
+        <a class="page" href="topic-4.html" data-lang-key="num-4"></a>
+        <a class="page" href="topic-5.html" data-lang-key="num-5"></a>
+      </div>
+
+      <div class="left-container">
+        <div class="click-btn">
+          <i class="fa-solid fa-angles-right"></i>
+        </div>
+
+        <div class="topic-2">
+          <img src="./assets/images/t-img.png" alt="" />
+          <span class="num" data-lang-key="num.3"></span>
+          <span class="text" data-lang-key="title-3"></span>
+        </div>
+
+        <div class="video-border">
+          <div class="video-container">
+            <div class="swiper video-swiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <video class="masked-video" muted playsinline>
+                    <source src="./assets/videos/5.mp4" type="video/mp4" />
+                  </video>
+                </div>
+
+                <div class="swiper-slide">
+                  <video class="masked-video" muted playsinline>
+                    <source src="./assets/videos/4.mp4" type="video/mp4" />
+                  </video>
+                </div>
+
+                <div class="swiper-slide">
+                  <video class="masked-video" muted playsinline>
+                    <source src="./assets/videos/7.mp4" type="video/mp4" />
+                  </video>
+                </div>
+
+                <div class="swiper-slide">
+                  <video class="masked-video" muted playsinline>
+                    <source src="./assets/videos/6.mp4" type="video/mp4" />
+                  </video>
+                </div>
+
+                <div class="swiper-slide">
+                  <video class="masked-video" muted playsinline>
+                    <source src="./assets/videos/3.mp4" type="video/mp4" />
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-container">
+        <div class="content-box">
+          <button class="swiper-btn prev-btn hide-btn">
+            <img src="./assets/images/prev-btn.png" alt="" />
+          </button>
+
+          <div class="swiper content-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="content-text">
+                  <img src="./assets/images/swiper-content.png" alt="" />
+                  <span data-lang-key="slide-3.1"></span>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="content-text">
+                  <img src="./assets/images/swiper-content.png" alt="" />
+                  <span data-lang-key="slide-3.2"></span>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="content-text">
+                  <img src="./assets/images/swiper-content.png" alt="" />
+                  <span data-lang-key="slide-3.3"></span>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="content-text">
+                  <img src="./assets/images/swiper-content.png" alt="" />
+                  <span data-lang-key="slide-3.4"></span>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="content-text">
+                  <img src="./assets/images/swiper-content.png" alt="" />
+                  <span data-lang-key="slide-3.5"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button class="swiper-btn next-btn">
+            <img src="./assets/images/next-btn.png" alt="" />
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <script>
+      const clickBtn = document.querySelector(".click-btn");
+      const main = document.querySelector("main");
+      const prevBtn = document.querySelector(".prev-btn");
+      const nextBtn = document.querySelector(".next-btn");
+
+      let videoSwiper;
+      let contentSwiper;
+      let swiperStarted = false;
+
+      function updateNavigationButtons() {
+        if (!contentSwiper) return;
+
+        prevBtn.classList.toggle("hide-btn", contentSwiper.isBeginning);
+        nextBtn.classList.toggle("hide-btn", contentSwiper.isEnd);
+      }
+
+      function playActiveVideo() {
+        const allVideos = document.querySelectorAll(".masked-video");
+
+        allVideos.forEach((video) => {
+          video.pause();
+          video.currentTime = 0;
+        });
+
+        const activeVideo = document.querySelector(
+          ".video-swiper .swiper-slide-active .masked-video",
+        );
+
+        if (activeVideo) {
+          activeVideo.play();
+        }
+      }
+
+      clickBtn.addEventListener("click", () => {
+        main.classList.add("show-video");
+
+        if (!swiperStarted) {
+          videoSwiper = new Swiper(".video-swiper", {
+            effect: "fade",
+            fadeEffect: {
+              crossFade: true,
+            },
+            allowTouchMove: false,
+            speed: 700,
+          });
+
+          contentSwiper = new Swiper(".content-swiper", {
+            effect: "fade",
+            fadeEffect: {
+              crossFade: true,
+            },
+            speed: 700,
+            navigation: {
+              nextEl: ".next-btn",
+              prevEl: ".prev-btn",
+            },
+            on: {
+              init: function () {
+                updateNavigationButtons();
+              },
+              slideChange: function () {
+                videoSwiper.slideTo(this.activeIndex);
+                playActiveVideo();
+                updateNavigationButtons();
+              },
+            },
+          });
+
+          swiperStarted = true;
+          updateNavigationButtons();
+        }
+
+        setTimeout(() => {
+          playActiveVideo();
+          updateNavigationButtons();
+        }, 500);
+      });
+    </script>
+  </body>
+</html>

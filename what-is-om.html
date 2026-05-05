@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title data-lang-key="title"></title>
+  </head>
+  <style>
+    body {
+    }
+
+    .page-swipe-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      background-image: url("./assets/images/bg-image.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+
+      transform: translateX(50%);
+      transition: transform 0.4s ease-in-out;
+    }
+
+    body.page-swipe-in .page-swipe-layer {
+      transform: translateX(0);
+    }
+
+    body.page-swipe-out .page-swipe-layer {
+      transform: translateX(-70%);
+    }
+
+    .page-title span {
+      font-size: 2.5vw !important;
+    }
+
+    .page-title {
+      position: absolute !important;
+      top: 90% !important;
+      left: 50% !important;
+      width: 22vw !important;
+      height: 6vw !important;
+      border-radius: 1.5vw !important;
+      z-index: 999999 !important;
+      transform: translate(-50%, -50%) !important;
+      background-color: #81004d !important;
+      border: 0.2vw solid white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .page-title span {
+      transition: color 0.3s ease;
+      text-shadow: none !important;
+      font-weight: 400 !important;
+    }
+    .page-title:hover {
+      background-color: #ffd57d !important;
+    }
+    .page-title:hover span {
+      color: #81004d !important;
+    }
+
+    .page-image {
+      -webkit-mask-image: url("./assets/images/mask-image.png") !important;
+      mask-image: url("./assets/images/mask-image.png") !important;
+      -webkit-mask-size: contain !important;
+      mask-size: contain !important;
+      -webkit-mask-repeat: no-repeat !important;
+      mask-repeat: no-repeat !important;
+      -webkit-mask-position: center !important;
+      mask-position: center !important;
+    }
+    .container {
+      width: 100%;
+      position: relative;
+      display: block;
+      margin: auto;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 45vw;
+    }
+  </style>
+  <body>
+    <div class="page-swipe-layer">
+      <a class="home-button home-btn" href="index.html">
+        <img src="./assets/images/home.png" alt="" />
+      </a>
+
+      <div class="language-container">
+        <div class="english active">E</div>
+        <div class="hindi">H</div>
+        <div class="gujrati">G</div>
+      </div>
+
+      
+        
+    </div>
+
+    <script src="./assets/js/app.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        requestAnimationFrame(() => {
+          document.body.classList.add("page-swipe-in");
+        });
+
+        const pageTitle = document.querySelector(".page-title");
+
+        pageTitle?.addEventListener("click", () => {
+          document.body.classList.remove("page-swipe-in");
+          document.body.classList.add("page-swipe-out");
+
+          setTimeout(() => {
+            window.location.href = "pages.html";
+          }, 400);
+        });
+      });
+    </script>
+  </body>
+</html>

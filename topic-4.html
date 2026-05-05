@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-lang-key="title-4"></title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <style>
+      .home-button,
+      .home-btn,
+      .language-container,
+      .language-container div {
+        pointer-events: auto !important;
+      }
+      .page-title {
+        opacity: 1;
+        z-index: 1000;
+      }
+      .language-container {
+        opacity: 1;
+        pointer-events: auto !important;
+        z-index: 999999 !important;
+      }
+
+      .language-container div {
+        pointer-events: auto !important;
+      }
+
+      .home-button,
+      .home-btn {
+        opacity: 1;
+        pointer-events: auto !important;
+        z-index: 999999 !important;
+      }
+
+      main {
+        position: relative;
+        width: 100%;
+        height: 40vw;
+        top: 50%;
+        left: 50%;
+        bottom: auto;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+      }
+
+      .left-container,
+      .right-container {
+        position: relative;
+        width: 50%;
+        height: 100%;
+      }
+
+      .left-container {
+        padding-left: 5vw;
+      }
+      /* OUTER BORDER MASK */
+      .left-container .video-border {
+        width: 36vw;
+        height: 36vw;
+        margin: 0 auto;
+
+        margin-top: 7%;
+        background: white;
+
+        -webkit-mask-image: url("./assets/images/mask-image.png");
+        mask-image: url("./assets/images/mask-image.png");
+
+        -webkit-mask-size: contain;
+        mask-size: contain;
+
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+
+        -webkit-mask-position: center;
+        mask-position: center;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* INNER VIDEO MASK */
+      .left-container .video-container {
+        width: 34vw;
+        height: 34vw;
+        overflow: hidden;
+
+        -webkit-mask-image: url("./assets/images/mask-image.png");
+        mask-image: url("./assets/images/mask-image.png");
+
+        -webkit-mask-size: contain;
+        mask-size: contain;
+
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+
+        -webkit-mask-position: center;
+        mask-position: center;
+      }
+
+      .video-container .masked-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .content-text {
+        width: 25vw;
+        display: block;
+        margin: 0 auto;
+        margin-top: 30%;
+        position: relative !important;
+      }
+
+      .right-container img {
+        width: 100%;
+        object-fit: contain;
+      }
+      .right-container span {
+        position: absolute;
+        font-size: 1.5vw;
+        color: #4f4f4f;
+        top: 50%;
+        left: 50%;
+        width: 85%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        font-family: "BalooRegular";
+        line-height: 1.3;
+      }
+
+      .pages {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 1vw;
+        left: 3.5vw;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .pages .page {
+        width: 3.5vw;
+        height: 3.5vw;
+        background-color: white;
+        text-decoration: none;
+        color: #ff9d6b;
+        border: 0.3vw solid #dc9cff;
+        border-radius: 50%;
+        font-family: "BalooRegular";
+        font-size: 1.8vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0.2vw 0.2vw #753598c7;
+        transform: scale(1);
+        transition:
+          transform 0.3s ease,
+          color 0.3s ease,
+          background-color 0.3s ease;
+      }
+
+      .page:hover {
+        transform: scale(1.05);
+        background-color: #ff9d6b !important;
+        color: white !important;
+      }
+
+      .page-active {
+        background-color: #ff9d6b !important;
+        color: white !important;
+      }
+    </style>
+  </head>
+  <body>
+    <a class="home-button home-btn" href="index.html">
+      <img src="./assets/images/home.png" alt="" />
+    </a>
+
+    <div class="page-title">
+      <img src="./assets/images/t-1.png" alt="" />
+      <span data-lang-key="title"></span>
+      <img src="./assets/images/t-2.png" alt="" />
+    </div>
+
+    <!-- nav-container -->
+    <div class="language-container">
+      <div class="english active">E</div>
+      <div class="hindi">H</div>
+      <div class="gujrati">G</div>
+    </div>
+
+    <main>
+      <div class="left-container">
+        <div class="pages">
+          <a class="page" href="topic-1.html" data-lang-key="num-1"></a>
+          <a class="page" href="topic-2.html" data-lang-key="num-2"></a>
+          <a class="page" href="topic-3.html" data-lang-key="num-3"></a>
+          <a
+            class="page page-active"
+            href="topic-4.html"
+            data-lang-key="num-4"
+          ></a>
+          <a class="page" href="topic-5.html" data-lang-key="num-5"></a>
+        </div>
+        <div class="video-border">
+          <div class="video-container">
+            <video class="masked-video" autoplay muted loop playsinline>
+              <source src="./assets/videos/8.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </div>
+      <div class="right-container">
+        <div class="content-text">
+          <img src="./assets/images/swiper-content.png" alt="" />
+          <span data-lang-key="slide-4"></span>
+        </div>
+      </div>
+    </main>
+
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>
