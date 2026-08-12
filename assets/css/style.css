@@ -88,7 +88,8 @@ background-color: white;
 
 .pranam-video video {
     width: 90%;
-    height: 83%;
+    height: 85%;
+    padding-top: 2vw;
     object-fit: cover;
 
     /* Very light feather on ALL edges */
@@ -336,6 +337,11 @@ background-color: white;
     color: white;
   }
 
+
+body[data-lang="gu"] .page-title span {
+  font-weight: lighter!important;
+}
+
   .page-title img {
     width: 2vw;
     display: block;
@@ -500,15 +506,13 @@ background-color: white;
   }
 
   /* ─── HOME BTN & LANGUAGE CONTAINER — stay hidden on load ─── */
-  .home-button,
-  .language-container {
+  .home-button {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.5s ease;
   }
 
-  .home-button.revealed,
-  .language-container.revealed {
+  .home-button.revealed {
     opacity: 1;
     pointer-events: auto;
   }
