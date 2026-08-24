@@ -434,10 +434,6 @@
     </div>
 
     <div class="left-container">
-      <div class="click-btn">
-        <i class="fa-solid fa-angles-right"></i>
-      </div>
-
       <div class="topic-2">
         <img src="./assets/images/t-img.png" alt="" />
         <span class="num" data-lang-key="num.2"></span>
@@ -680,7 +676,7 @@
       }
     }
 
-    clickBtn.addEventListener("click", () => {
+    clickBtn?.addEventListener("click", () => {
       main.classList.add("show-video");
 
       if (!swiperStarted) {
