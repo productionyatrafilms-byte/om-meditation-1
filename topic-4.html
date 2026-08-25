@@ -59,17 +59,16 @@
          No padding-left, no auto margins, no margin-top hack —
          the video sits dead centre of the column both ways. */
       .left-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        padding-left: 5vw;
       }
 
       /* OUTER BORDER MASK */
       .left-container .video-border {
-        width: 38vw;
-        height: 38vw;
-        flex: 0 0 auto;
-        margin: 0;
+        width: 42vw;
+        height: 42vw;
+        margin: 0 auto;
+
+        margin-top: 7%;
         background: white;
 
         -webkit-mask-image: url("./assets/images/mask-image.png");
@@ -91,9 +90,8 @@
 
       /* INNER VIDEO MASK */
       .left-container .video-container {
-        width: 36vw;
-        height: 36vw;
-        flex: 0 0 auto;
+        width: 40vw;
+        height: 40vw;
         overflow: hidden;
 
         -webkit-mask-image: url("./assets/images/mask-image.png");
