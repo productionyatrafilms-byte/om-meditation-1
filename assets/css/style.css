@@ -15,15 +15,15 @@
 
 @font-face {
   font-family: "ITFDevanagari";
-  src: url("../../fonts/ITFDevanagari.ttc") format("truetype");
+  src: url("../../fonts/ITFDevanagari-Bold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "NotoSansGujaratiRegular";
-  src: url("../../fonts/NotoSansGujarati-Regular.ttf") format("truetype");
+  font-family: "NotoSansGujaratiBold";
+  src: url("../../fonts/NotoSansGujarati-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -65,7 +65,7 @@
 }
 
 body[data-lang="gu"] {
-  font-family: "NotoSansGujaratiRegular"!important;
+  font-family: "NotoSansGujaratiBold"!important;
   font-weight: 700!important;
 }
 
