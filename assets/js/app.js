@@ -5,7 +5,8 @@ const btnGu = document.querySelector(".gujrati");
 const DEFAULT_LANG = "English";
 const STORAGE_KEY = "selectedLanguage";
 
-let translations = {};
+// translations come from assets/js/data.js, which must be loaded first
+let translations = typeof data !== "undefined" ? data : {};
 
 // ================= LANGUAGE AUDIO =================
 
@@ -111,28 +112,19 @@ function isPageRefresh() {
 // ================= LOAD LANGUAGE =================
 
 window.addEventListener("DOMContentLoaded", () => {
-  fetch("./assets/json/data.json")
-    .then((res) => res.json())
-    .then((data) => {
-      translations = data;
+  let langToApply = DEFAULT_LANG;
+  const savedLang = localStorage.getItem(STORAGE_KEY);
 
-      let langToApply = DEFAULT_LANG;
-      const savedLang = localStorage.getItem(STORAGE_KEY);
+  if (isPageRefresh()) {
+    // On refresh always reset to English
+    langToApply = DEFAULT_LANG;
+    localStorage.setItem(STORAGE_KEY, DEFAULT_LANG);
+  } else {
+    // On normal page load / navigation keep selected language
+    langToApply = savedLang || DEFAULT_LANG;
+  }
 
-      if (isPageRefresh()) {
-        // On refresh always reset to English
-        langToApply = DEFAULT_LANG;
-        localStorage.setItem(STORAGE_KEY, DEFAULT_LANG);
-      } else {
-        // On normal page load / navigation keep selected language
-        langToApply = savedLang || DEFAULT_LANG;
-      }
-
-      applyLanguage(langToApply);
-    })
-    .catch((err) => {
-      console.error("Error loading translations:", err);
-    });
+  applyLanguage(langToApply);
 });
 
 // ================= LANGUAGE BUTTON CLICKS =================
