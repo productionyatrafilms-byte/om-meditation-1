@@ -448,31 +448,31 @@
           <div class="swiper video-swiper">
             <div class="swiper-wrapper">
               <div class="swiper-slide">
-                <video class="masked-video" muted playsinline>
+                <video class="masked-video" muted playsinline preload="auto">
                   <source src="./assets/videos/5.mp4" type="video/mp4" />
                 </video>
               </div>
 
               <div class="swiper-slide">
-                <video class="masked-video" muted playsinline>
+                <video class="masked-video" muted playsinline preload="none">
                   <source src="./assets/videos/4.mp4" type="video/mp4" />
                 </video>
               </div>
 
               <div class="swiper-slide">
-                <video class="masked-video" muted playsinline>
+                <video class="masked-video" muted playsinline preload="none">
                   <source src="./assets/videos/7.mp4" type="video/mp4" />
                 </video>
               </div>
 
               <div class="swiper-slide">
-                <video class="masked-video" muted playsinline>
+                <video class="masked-video" muted playsinline preload="none">
                   <source src="./assets/videos/6.mp4" type="video/mp4" />
                 </video>
               </div>
 
               <div class="swiper-slide">
-                <video class="masked-video" muted playsinline>
+                <video class="masked-video" muted playsinline preload="none">
                   <source src="./assets/videos/3.mp4" type="video/mp4" />
                 </video>
               </div>
@@ -537,7 +537,6 @@
   <script src="./assets/js/swiper-bundle.min.js"></script>
     <script src="./assets/js/data.js"></script>
   <script src="assets/js/app.js"></script>
-      <script src="./assets/js/djp.js"></script>
 
 
   <script>
@@ -668,6 +667,7 @@
       allVideos.forEach((video) => {
         video.pause();
         video.currentTime = 0;
+        video.preload = "none";
       });
 
       const activeVideo = document.querySelector(
@@ -675,6 +675,7 @@
       );
 
       if (activeVideo) {
+        activeVideo.preload = "auto";
         activeVideo.play();
       }
     }
